@@ -1,0 +1,43 @@
+<nav>
+    <div id="menuBtn">
+        ☰
+    </div>
+
+    <div class="logo">
+        SkillSync
+    </div>
+
+    {% if user.is_authenticated %}
+
+    <a href="{% url 'profile' %}" id="authBtn">
+        <i class="fa-regular fa-user"></i> Profile
+    </a>
+
+    {% else %}
+
+    <a href="{% url 'login' %}" id="authBtn">
+        Login / Sign Up
+    </a>
+
+    {% endif %}
+</nav>
+
+<div id="sidebar">
+
+    <a href="{% url 'home' %}">🏠 Home</a>
+
+    <a href="{% url 'students' %}">👨‍🎓 Students</a>
+
+    <a href="{% url 'skills' %}">💡 Skills</a>
+
+    <a href="{% url 'projects' %}">🚀 Projects</a>
+
+    <a href="{% url 'groups' %}">👥 Groups</a>
+
+    <a href="#" id="darkModeBtn">
+        🌙 Dark Mode
+    </a>
+
+</div>
+
+<div id="overlay"></div>

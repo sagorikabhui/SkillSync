@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groups - SkillSync</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    {% include "accounts/navbar.html" %}
+
+    <section class="groups-page">
+
+        <div class="groups-header">
+
+            <h1>Study Groups</h1>
+
+            <div class="header-buttons">
+
+                <a href="/accounts/my-groups/" class="nav-btn">
+                    My Groups
+                </a>
+
+                <button class="nav-btn" id="showGroupForm">
+                    Create Group
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- <hr class="groups-divider"> -->
+
+        <div class="group-form">
+
+            ```
+            <h2>Create Study Group</h2>
+
+            <form method="POST" action="{% url 'create_group' %}" class="group-create-form">
+
+                {% csrf_token %}
+
+                <input type="text" id="groupTitle" name="name" placeholder="Group Name" required>
+
+                <input type="text" id="groupDescription" name="description" placeholder="Group Description" required>
+
+                <input type="number" id="groupMembers" name="groupMembers" placeholder="Expected Members" required>
+
+                <button type="submit" id="createGroupBtn">
+                    Create Group
+                </button>
+
+            </form>
+            ```
+
+        </div>
+
+
+
+
+        <div class="groups-container">
+
+            {% for group in groups %}
+
+            <div class="group-card reveal">
+
+                <div class="group-avatar">
+                    {{ group.name|first|upper }}
+                </div>
+
+                <h3>{{ group.name }}</h3>
+
+                <p class="group-desc">
+                    {{ group.description }}
+                </p>
+
+                <a href="{% url 'group_detail' group.id %}" class="nav-btn">
+
+                    View Group
+
+                </a>
+
+                <br><br>
+
+                {% if group.id in joined_groups %}
+
+                <button class="join-btn">
+                    Joined
+                </button>
+
+                {% else %}
+
+                <a href="/accounts/join-group/{{ group.id }}/" class="join-btn">
+
+                    Join Group
+
+                </a>
+
+                {% endif %}
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+    </section>
+
+
+    <div id="notification"></div>
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

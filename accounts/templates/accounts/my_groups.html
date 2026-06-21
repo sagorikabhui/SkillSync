@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>My Groups</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    {% include "accounts/navbar.html" %}
+
+    <section class="groups-page">
+
+        <h1>My Groups</h1>
+
+        <div class="group-container">
+
+            {% for group in groups %}
+
+            <div class="group-card">
+
+                <h3>{{ group.name }}</h3>
+
+                <p>{{ group.description }}</p>
+
+                <a href="/accounts/leave-group/{{ group.id }}/" class="join-btn">
+                    Leave Group
+                </a>
+
+            </div>
+
+            {% empty %}
+
+            <p>You have not joined any groups yet.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

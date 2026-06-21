@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - SkillSync</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    {% include "accounts/navbar.html" %}
+
+    <section class="profile-page">
+
+        <div class="profile-card">
+
+            <div class="profile-avatar">
+                {{ profile.user.username|first|upper }}
+            </div>
+
+            <h2>{{ profile.user.username }}</h2>
+
+            <p>{{ profile.year }}</p>
+
+            <h3>Skills</h3>
+            <p>{{ profile.can_teach }}</p>
+
+            <h3>About Me</h3>
+            <p>{{ profile.bio }}</p>
+
+            <h3>Learning Goals</h3>
+            <p>{{ profile.wants_to_learn }}</p>
+
+            <h3>College</h3>
+            <p>{{ profile.college }}</p>
+
+            <div class="profile-actions">
+
+                <a href="{% url 'edit_profile' %}" class="nav-btn">
+                    Edit Profile
+                </a>
+
+                <a href="{% url 'logout' %}" class="nav-btn logout-btn">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div id="notification"></div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

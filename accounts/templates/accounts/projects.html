@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - SkillSync</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    {% include "accounts/navbar.html" %}
+
+    <section class="projects-page">
+
+        <div class="projects-header">
+            <h1>Project Collaboration</h1>
+
+            <div class="header-buttons">
+
+                <a href="/accounts/my-projects/" class="nav-btn">
+                    My Projects
+                </a>
+
+                <button id="showProjectForm" class="nav-btn">
+                    Create Project
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+        <div class="project-form" id="projectForm" style="display:none;">
+
+            <h2>Create New Project</h2>
+
+            <form method="POST" action="/accounts/create-project/">
+
+                {% csrf_token %}
+
+                <input type="text" name="title" placeholder="Project Title" required>
+
+                <textarea name="description" placeholder="Project Description" rows="4"></textarea>
+
+                <input type="text" name="skills_required" placeholder="Required Skills" required>
+
+                <input type="number" name="team_size" placeholder="Team Members Needed" required>
+
+                <input type="url" name="github_link" placeholder="GitHub Repository Link">
+
+                <select name="status">
+
+                    <option value="Planning">
+                        Planning
+                    </option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                </select>
+
+                <!-- <input type="number" name="progress" placeholder="Project Progress (%)" min="0" max="100" value="0"> -->
+
+                <button type="submit">
+                    Create Project
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="projects-container">
+
+            {% for project in projects %}
+
+            <div class="project-card reveal">
+
+                <h3>🚀 {{ project.title }}</h3>
+
+                <p><strong>Skills Required:</strong></p>
+
+                <div class="project-tags">
+
+                    <span class="badge">
+                        {{ project.skills_required }}
+                    </span>
+
+                </div>
+
+                <p class="team-needed">
+                    👥 Need {{ project.team_size }} Members
+                </p>
+
+                <a href="{% url 'project_detail' project.id %}" class="nav-btn">
+                    View Project
+                </a>
+
+                <br><br>
+
+                {% if project.id in joined_projects %}
+
+                <a class="nav-btn" href="/accounts/withdraw-request/{{ project.id }}/">
+                    Withdraw Request
+                </a>
+
+                {% elif project.is_full %}
+
+                <button disabled>
+                    Project Full
+                </button>
+
+                {% else %}
+
+                <a class="nav-btn" href="/accounts/join-project/{{ project.id }}/">
+                    Join Project
+                </a>
+
+                {% endif %}
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <div id="notification"></div>
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

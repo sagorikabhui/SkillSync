@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills - SkillSync</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    {% include "accounts/navbar.html" %}
+
+    <!-- Skills Section -->
+
+    <section class="skills-page">
+
+        <h1>Skill Exchange</h1>
+
+        <div class="skills-container">
+
+            {% for profile in profiles %}
+
+            <div class="skill-card reveal">
+
+                <h3>{{ profile.user.username }}</h3>
+
+                <h4>Can Teach</h4>
+
+                <div class="skill-tags">
+
+                    <span class="badge">
+                        {{ profile.can_teach }}
+                    </span>
+
+                </div>
+
+                <h4>Wants To Learn</h4>
+
+                <div class="skill-tags">
+
+                    <span class="badge learn">
+                        {{ profile.wants_to_learn }}
+                    </span>
+
+                </div>
+
+                <a href="/accounts/student/{{ profile.id }}/" class="view-profile-btn">
+                    View Profile
+                </a>
+
+            </div>
+
+            {% endfor %}
+        </div>
+
+    </section>
+
+
+    <div id="notification"></div>
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

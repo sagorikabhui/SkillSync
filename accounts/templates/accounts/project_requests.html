@@ -1,0 +1,95 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Project Requests - SkillSync</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    {% include "accounts/navbar.html" %}
+
+    <section class="projects-page">
+
+        <h1>Project Requests</h1>
+
+        <div class="projects-container">
+
+
+            {% for request in requests %}
+
+            <div class="project-card">
+
+                <h3>{{ request.student.username }}</h3>
+
+                <p>
+                    <strong>Project:</strong>
+                    {{ request.project.title }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ request.status }}
+                </p>
+
+                {% if request.status == "Pending" %}
+
+                <div class="request-actions">
+
+                    <a class="accept-btn" href="/accounts/accept-request/{{ request.id }}/">
+                        Accept
+                    </a>
+
+                    <a class="reject-btn" href="/accounts/reject-request/{{ request.id }}/">
+                        Reject
+                    </a>
+
+                </div>
+
+                {% elif request.status == "Accepted" %}
+
+                <p>✅ Accepted</p>
+
+                <div class="request-actions">
+
+                    <a class="reject-btn" href="/accounts/reject-request/{{ request.id }}/">
+                        Reject
+                    </a>
+
+                </div>
+
+                {% else %}
+
+                <p>❌ Rejected</p>
+
+                <div class="request-actions">
+
+                    <a class="accept-btn" href="/accounts/accept-request/{{ request.id }}/">
+                        Accept
+                    </a>
+
+                </div>
+
+                {% endif %}
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+</body>
+
+</html>

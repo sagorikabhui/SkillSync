@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>{{ group.name }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    {% include "accounts/navbar.html" %}
+
+    <section class="profile-page">
+
+        <div class="profile-card">
+
+            <h1>
+                👥 {{ group.name }}
+            </h1>
+
+            <br>
+
+            <h3>
+                Description
+            </h3>
+
+            <p>
+                {{ group.description }}
+            </p>
+
+            <br>
+
+            <h3>
+                Group Owner
+            </h3>
+
+            <p>
+                {{ group.created_by.username }}
+            </p>
+
+            <br>
+
+            <h3>
+                Members
+            </h3>
+
+            {% if members %}
+
+            {% for member in members %}
+
+            <p>
+                {{ member.student.username }}
+            </p>
+
+            {% endfor %}
+
+            {% else %}
+
+            <p>
+                No members yet
+            </p>
+
+            {% endif %}
+
+            <br>
+
+            <a href="{% url 'groups' %}" class="join-btn">
+
+                Back to Groups
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

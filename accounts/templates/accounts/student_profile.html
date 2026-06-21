@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>{{ profile.user.username }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+
+    <div class="profile-card">
+
+        <h1>{{ profile.user.username }}</h1>
+
+        <p>
+            <strong>College:</strong>
+            {{ profile.college }}
+        </p>
+
+        <p>
+            <strong>Year:</strong>
+            {{ profile.year }}
+        </p>
+
+        <p>
+            <strong>Can Teach:</strong>
+            {{ profile.can_teach }}
+        </p>
+
+        <p>
+            <strong>Wants To Learn:</strong>
+            {{ profile.wants_to_learn }}
+        </p>
+
+        <p>
+            <strong>Bio:</strong>
+            {{ profile.bio }}
+        </p>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

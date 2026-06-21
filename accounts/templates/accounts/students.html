@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - SkillSync</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    {% include "accounts/navbar.html" %}
+
+    <!-- Students Section -->
+
+    <section class="students-page">
+
+        <h1>Explore Students</h1>
+
+        <input type="text" id="searchInput" placeholder="🔍 Search students by name">
+
+        <!-- <p id="studentCount">4 Students Found</p> -->
+
+        <div class="students-container">
+
+            {% for profile in profiles %}
+
+            <div class="student-card reveal" data-name="{{ profile.user.username }}"
+                data-skills="{{ profile.can_teach }}">
+
+                <div class="student-avatar">
+                    {{ profile.user.username|first|upper }}
+                </div>
+
+                <h3>{{ profile.user.username }}</h3>
+
+                <div class="skill-badges">
+
+                    <span class="badge">
+                        {{ profile.can_teach }}
+                    </span>
+
+                </div>
+
+                <p>
+                    {{ profile.college }}
+                </p>
+
+                <p>
+                    {{ profile.year }}
+                </p>
+
+                <a href="/accounts/student/{{ profile.id }}/" class="nav-btn">
+                    View Profile
+                </a>
+
+            </div>
+
+            {% endfor %}
+        </div>
+
+    </section>
+
+    <div id="notification"></div>
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

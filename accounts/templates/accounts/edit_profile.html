@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Edit Profile</title> -->
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    {% include "accounts/navbar.html" %}
+
+    <section class="profile-page">
+
+        
+        <div class="profile-card">
+
+            <h1>Edit Profile</h1>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <label>College</label>
+                <input type="text" name="college" value="{{ profile.college }}" placeholder="College">
+
+                <label>Year</label>
+                <input type="text" name="year" value="{{ profile.year }}" placeholder="Year">
+
+                <label>About Me</label>
+                <textarea name="bio" placeholder="Bio">{{ profile.bio }}</textarea>
+
+                <label>Can Teach</label>
+                <input type="text" name="can_teach" value="{{ profile.can_teach }}" placeholder="Can Teach">
+
+                <label>Wants To Learn</label>
+                <input type="text" name="wants_to_learn" value="{{ profile.wants_to_learn }}"
+                    placeholder="Wants To Learn">
+
+                <button type="submit" class="nav-btn">
+                    Save Profile
+                </button>
+
+            </form>
+
+        </div>
+        
+
+    </section>
+
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

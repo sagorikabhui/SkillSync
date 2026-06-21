@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Projects - SkillSync</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    {% include "accounts/navbar.html" %}
+
+    <section class="projects-page">
+
+        <h1>My Projects</h1>
+
+        <div style="margin-bottom:20px;">
+
+            <a href="{% url 'project_requests' %}" class="join-btn">
+                Project Requests
+            </a>
+
+        </div>
+
+        <h2>Projects Created By Me</h2>
+
+        <div class="projects-container">
+
+            {% for project in created_projects %}
+
+            <div class="project-card">
+
+                <h3>{{ project.title }}</h3>
+
+                <p>
+                    Skills: {{ project.skills_required }}
+                </p>
+
+                <p>
+                    Team Size Needed: {{ project.team_size }}
+                </p>
+
+                <p>
+                    Current Members:
+                    {{ project.accepted_count }}
+                </p>
+
+                <p>
+                    <strong>Team Members:</strong>
+                </p>
+
+                <ul>
+
+                    {% for request in project.joinrequest_set.all %}
+
+                    {% if request.status == "Accepted" %}
+
+                    <li>
+                        {{ request.student.username }}
+                    </li>
+
+                    {% endif %}
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            {% empty %}
+
+            <p>No projects created yet.</p>
+
+            {% endfor %}
+
+        </div>
+
+        <br><br>
+
+        <h2>Projects I Joined</h2>
+
+        <div class="projects-container">
+
+            {% for project in joined_projects %}
+
+            <div class="project-card">
+
+                <h3>{{ project.title }}</h3>
+
+                <p>
+                    Skills: {{ project.skills_required }}
+                </p>
+
+                <p>
+                    Team Size: {{ project.team_size }}
+                </p>
+
+            </div>
+
+            {% empty %}
+
+            <p>No joined projects yet.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>
