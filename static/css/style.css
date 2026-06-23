@@ -2359,3 +2359,31 @@ resize: vertical;
 .profile-card button {
 margin-top: 10px;
 }
+
+/* Login & Signup Dark Mode */
+
+.dark-mode .auth-card {
+    background: #1E293B;
+}
+
+.dark-mode .auth-card h1 {
+    color: white;
+}
+
+.dark-mode .auth-subtitle {
+    color: #CBD5E1;
+}
+
+.dark-mode .auth-link {
+    color: #CBD5E1;
+}
+
+.dark-mode .auth-card input {
+    background: #334155;
+    color: white;
+    border: 1px solid #475569;
+}
+
+.dark-mode .auth-card input::placeholder {
+    color: #CBD5E1;
+}
